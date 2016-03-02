@@ -13,7 +13,7 @@ package ics314;
 import static java.lang.System.*;
 import java.io.*;
 public class ICS314 {
-//Testing if fork worked correctly
+
     /**
      * @param args the command line arguments
      */

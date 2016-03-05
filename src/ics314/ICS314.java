@@ -17,8 +17,11 @@ public class ICS314 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-       
+    public static void main(String[] args) {       
+        
+        
+        
+ //hello Nigel and Chris      
         try{
             FileWriter fw = new FileWriter("314.ics");
             PrintWriter pw = new PrintWriter(fw);

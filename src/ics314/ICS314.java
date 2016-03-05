@@ -18,10 +18,7 @@ public class ICS314 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       // File file = new File("C:/Users/Ada Tomosada/Documents/314.ics");
-       //file.getParentFile().mkdirs();
-        //PrintWriter printWriter = new PrintWriter("314.ics","UTF-8");
-        // TODO code application logic here
+       
         try{
             FileWriter fw = new FileWriter("314.ics");
             PrintWriter pw = new PrintWriter(fw);

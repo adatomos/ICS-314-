@@ -25,7 +25,7 @@ public class ICS314 {
          * this is chris's comment block!
          * 
          **********************/
- //hello Nigel and Chris      
+ //HELLO Nigel and Chris      
         try{
             FileWriter fw = new FileWriter("314.ics");
             PrintWriter pw = new PrintWriter(fw);

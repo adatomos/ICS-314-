@@ -24,9 +24,13 @@ public class GreatCircleDistance {
                 Math.sin(Drlon/2) * Math.sin(Drlon/2));
         float c = (float) (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
 
-        float distance = EarthRadius * c;
-        return distance;
+        float distanceKM = EarthRadius * c;
+        return distanceKM;
   
   }
+        public float GreatCircleDistMI(float gpsla1, float gpslo1, float gpsla2, float gpslo2){
+            float distanceMI = (float) (GreatCircleDistKM(gpsla1,gpslo1,gpsla2,gpslo2)*0.62137);
+            return distanceMI;  // distance in miles
+        }
     
 }

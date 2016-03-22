@@ -10,7 +10,7 @@ package ics314;
  * @author Ada
  */
 public class GreatCircleDistance {
-        public float[] GreatCircleDistKM(float gpsla1, float gpslo1, float gpsla2, float gpslo2){
+        public float[] GreatCircleDist(float gpsla1, float gpslo1, float gpsla2, float gpslo2){
         float[] distance = new float[2];
         float EarthRadius = (float)6371; //in km
         float rlat1, rlat2;  // gpsla in radians
@@ -28,7 +28,7 @@ public class GreatCircleDistance {
         float distanceKM = EarthRadius * c;
         distance[0] = distanceKM;  // distancee in kilometers
         float distanceMI = (float) (distanceKM*0.62137);
-        distance[1] = distanceMI;
+        distance[1] = distanceMI; // distance in miles
         return distance;
   }  
 }

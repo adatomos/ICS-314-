@@ -81,20 +81,52 @@ public class GreatCircleDistance {
     public void AddComment(String FileName, float DistKM, float DistMI) throws IOException{
         File inFile = new File(FileName);
         File outFile = new File("TEMP.tmp");
-         //input
-        FileInputStream fis  = new FileInputStream(FileName);
-        BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-        // output         
-        FileOutputStream fos = new FileOutputStream(outFile);
-        PrintWriter out = new PrintWriter(fos);
-        String thisLine = "";
-        while ((thisLine = in.readLine()) != null) {
-              if(thisLine.contains("DTSTAMP"))out.println("COMMENT:distance in kilometers "+DistKM+"; distance in miles "+DistMI); 
-              out.println(thisLine);
-        }
-    out.flush();
-    out.close();
-    in.close();
+            try ( //input
+                    FileInputStream fis = new FileInputStream(FileName)) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+                // output
+                FileOutputStream fos = new FileOutputStream(outFile);
+                PrintWriter out = new PrintWriter(fos);
+                String thisLine = "";
+                while ((thisLine = in.readLine()) != null) {
+                    if(thisLine.contains("DTSTAMP"))out.println("COMMENT:distance to next event in kilometers "+DistKM+"; in miles "+DistMI);
+                    out.println(thisLine);
+                }
+                out.flush();
+                out.close();
+                in.close();
+                fos.close();
+            }
+    System.gc();  // funny when I ran this again the inFile was not deleted, so I put this in and it worked.
+    
+    inFile.delete();
+    outFile.renameTo(inFile);      
+    }
+       /** 
+   * AddCommentLastEvent method adds COMMENT field to the last .ics file. The COMMENT 
+   *     line is inserted after the CLASS field indicating that this is the last event
+   * input parameters: FileName of last event ex: ics314.ics 
+   */
+    public void AddCommentLastEvent(String FileName) throws IOException{
+        File inFile = new File(FileName);
+        File outFile = new File("TEMP2.tmp");
+            try ( //input
+                    FileInputStream fis = new FileInputStream(inFile)) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+                // output
+                FileOutputStream fos = new FileOutputStream(outFile);
+                PrintWriter out = new PrintWriter(fos);
+                String thisLine = "";
+                while ((thisLine = in.readLine()) != null) {
+                    if(thisLine.contains("DTSTAMP"))out.println("COMMENT:This is the last event");
+                    out.println(thisLine);
+                }
+                out.flush();
+                out.close();
+                in.close();
+                fos.close();
+            }
+    System.gc();  
     
     inFile.delete();
     outFile.renameTo(inFile);      

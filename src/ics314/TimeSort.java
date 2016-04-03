@@ -3,36 +3,32 @@ package ics314;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class TimeSort {
 
-	public static void main(String[] args) throws IOException {
-		startsort(args);
-		
-	}
 
-	public static void startsort(String[] args) throws IOException {
-		if (args.length < 2) {
+	public static void startsort(ArrayList<String> args) throws IOException {
+		if (args.size() < 2) {
 			System.out.println("Need more than 1 .ics file");
 		} else {
-			String[] names = args;
-			int[] times = new int[args.length];
-			for (int i = 0; i < args.length; i++) {
-				times[i] = findstarttime(args[i]);
+			String[] names = new String[args.size()];
+			for(int i = 0; i < args.size(); i++){
+				names[i] = args.get(i);
 			}
-			caltime[] cals = new caltime[args.length];
+			int[] times = new int[args.size()];
+			for (int i = 0; i < args.size(); i++) {
+				times[i] = findstarttime(args.get(i));
+			}
+			caltime[] cals = new caltime[args.size()];
 			for (int i = 0; i < names.length; i++) {
 				cals[i] = new caltime(times[i], names[i]);
 			}
 
 			Arrays.sort(cals, new caltimeComp());
 
-			 for(int i = 0; i < cals.length; i++){
-			 System.out.println(cals[i].getTime() + " " +
-			 cals[i].getFilename());
-			 }
 			 addcircledist(cals);
 		}
 	}

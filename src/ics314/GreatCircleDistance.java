@@ -25,7 +25,7 @@ import java.util.Scanner;
  * input parameters: latitude and longitude of two locations 
  */
 public class GreatCircleDistance {
-        public float[] GreatCircleDist(float gpsla1, float gpslo1, float gpsla2, float gpslo2){
+        public static float[] GreatCircleDist(float gpsla1, float gpslo1, float gpsla2, float gpslo2){
         float[] distance = new float[2];
         float EarthRadius = (float)6371; //in km
         float rlat1, rlat2;  // gpsla in radians
@@ -78,7 +78,7 @@ public class GreatCircleDistance {
    * input parameters: FileName  ex: ics314.ics; distance in km; distance in miles (calculated
    *    using GreatCircleDist)
    */
-    public void AddComment(String FileName, float DistKM, float DistMI) throws IOException{
+    public static void AddComment(String FileName, float DistKM, float DistMI) throws IOException{
         File inFile = new File(FileName);
         File outFile = new File("TEMP.tmp");
             try ( //input
@@ -89,7 +89,7 @@ public class GreatCircleDistance {
                 PrintWriter out = new PrintWriter(fos);
                 String thisLine = "";
                 while ((thisLine = in.readLine()) != null) {
-                    if(thisLine.contains("DTSTAMP"))out.println("COMMENT:distance to next event in kilometers "+DistKM+"; in miles "+DistMI);
+                    if(thisLine.contains("DTSTART"))out.println("COMMENT:distance to next event in kilometers "+DistKM+"; in miles "+DistMI);
                     out.println(thisLine);
                 }
                 out.flush();
@@ -107,7 +107,7 @@ public class GreatCircleDistance {
    *     line is inserted after the CLASS field indicating that this is the last event
    * input parameters: FileName of last event ex: ics314.ics 
    */
-    public void AddCommentLastEvent(String FileName) throws IOException{
+    public static void AddCommentLastEvent(String FileName) throws IOException{
         File inFile = new File(FileName);
         File outFile = new File("TEMP2.tmp");
             try ( //input
@@ -118,7 +118,7 @@ public class GreatCircleDistance {
                 PrintWriter out = new PrintWriter(fos);
                 String thisLine = "";
                 while ((thisLine = in.readLine()) != null) {
-                    if(thisLine.contains("DTSTAMP"))out.println("COMMENT:This is the last event");
+                    if(thisLine.contains("DTSTART"))out.println("COMMENT:This is the last event");
                     out.println(thisLine);
                 }
                 out.flush();

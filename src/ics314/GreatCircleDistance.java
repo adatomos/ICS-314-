@@ -131,4 +131,32 @@ public class GreatCircleDistance {
     inFile.delete();
     outFile.renameTo(inFile);      
     }
+         /** 
+   * IfGotGeo method returns boolean 
+   * true if there are latitude and longitude, false otherwise
+   * input parameter: FileName  ex: ics314.ics  
+   */
+        public static Boolean IfGotGeo(String FileName){
+        String[] str = new String[2];
+        String str1 = ":"; boolean bool = true;
+        File file =new File(FileName);
+        Scanner in = null;
+        try {
+            in = new Scanner(file);
+            while(in.hasNext())
+            {
+                String line=in.nextLine();
+                if(line.contains("GEO")){
+                   str = line.split("O");
+                   if(str[1].compareTo(str1)==0){
+                       bool = false;
+                   }
+                   else bool = true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bool;
+  }
 }

@@ -1,22 +1,41 @@
+package ics314;
+
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Simpleical {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-
-		userinter();
+		Scanner input = new Scanner(System.in);;
+		int loop = 1;
+		String ans = "";
+		ArrayList<String> list = new ArrayList<String>();
+		while (loop == 1) {
+			System.out.println("Create new file? y/n:");
+			ans = input.nextLine();
+			if (ans.equals("y")) {
+				list.add(userinter());
+			} else if (ans.equals("n")) {
+				loop = 0;
+			} else {
+				System.out.println("Invalid input, needs y or n");
+			}
+		}
+		TimeSort.startsort(list);
+		input.close();
+		
 	}
 
-	public static void userinter() throws IOException {
-		String calname = "", tstartdate = "", tstarttime = "", tstart = "", tenddate = "", tendtime = "", tend = "", msg = "", gpslat = "", gpslong = "", clas = "";
+	public static String userinter() throws IOException {
+		String filename = "", tstartdate = "", tstarttime = "", tstart = "", tenddate = "", tendtime = "", tend = "", msg = "", gpslat = "", gpslong = "", clas = "";
 		int test = 1, conttest = 1, ascii = 0;
 		Scanner input = new Scanner(System.in);
 
-		System.out.println("Enter Calendar Name:");
-		calname = input.nextLine();
+		System.out.println("Enter File Name:");
+		filename = input.nextLine() + ".ics";
 		// tstart inputs
 		while (test == 1) {
 			conttest = 1;
@@ -300,27 +319,26 @@ public class Simpleical {
 				test = 0;
 			} else {
 				System.out
-				.println("Input must be PUBLIC, PRIVATE, or CONFIDENTIAL, case sensitive");
+						.println("Input must be PUBLIC, PRIVATE, or CONFIDENTIAL, case sensitive");
 				test = 1;
 			}
 		}
 		System.out.println("Enter Message:");
 		msg = input.nextLine();
 
-		createics(calname, tstart, tend, msg, gpslat, gpslong, clas);
-
-		input.close();
+		createics(filename, tstart, tend, msg, gpslat, gpslong, clas);
+		return filename;
 	}
 
 	private static void createics(String name, String start, String end,
 			String msg, String gpsla, String gpslo, String clas)
 			throws IOException {
-		FileWriter write = new FileWriter("ics314.ics");
+		FileWriter write = new FileWriter(name);
 
 		write.write("BEGIN:VCALENDAR" + '\n'
 				+ "PRODID:-//Google Inc//Google Calendar 70.9054//EN" + '\n'
 				+ "VERSION:2.0" + '\n' + "CALSCALE:GREGORIAN" + '\n'
-				+ "METHOD:PUBLISH" + '\n' + "X-WR-CALNAME:");
+				+ "METHOD:PUBLISH" + '\n' + "X-WR-CALyNAME:");
 		write.write((name + '\n'));
 		write.write("X-WR-TIMEZONE:Pacific/Honolulu\nBEGIN:VEVENT\nDTSTART:");
 		write.write((start + '\n'));

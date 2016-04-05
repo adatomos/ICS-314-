@@ -4,10 +4,15 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,6 +34,9 @@ public class Letstrythis {
   private String tstartdate = "";
   private String tstarttime = "";
   private String tstart = "";
+  private String tenddatep1 = "";
+  private String tenddatep2 = "";
+  private String tenddatep3 = "";
   private String tenddate = "";
   private String tendtime = "";
   private String tend = "";
@@ -97,13 +105,6 @@ public class Letstrythis {
     textField_1.setBounds(141, 0, 134, 28);                                 //SET THE POSITION OF THE TEXT FIELD
     frame.getContentPane().add(textField_1);                                //ADD THE TEXT FIELD TO THE FRAME
     textField_1.setColumns(10);                                             //SET THE NUMBER OF COLUMNS IN THE TEXT FIELD                
-    textField_1.addActionListener(new ActionListener()
-    {
-      public void actionPerformed(ActionEvent e)
-      {
-        calname = textField_1.getText();
-      }
-    });
     
     /**********ENTER CALENDAR NAME: ENTER BUTTON**********/
     JButton btnEnter = new JButton("enter");                                //MAKE THE BUTTON
@@ -113,6 +114,7 @@ public class Letstrythis {
     {
       public void actionPerformed(ActionEvent e)
       {
+        calname = textField_1.getText();
         JOptionPane.showMessageDialog(null, calname);
       }
     });
@@ -136,7 +138,7 @@ public class Letstrythis {
     /**********START DATE: YEAR COMBO BOX**********/
     String[] startdateyear = {"2016","2017","2018","2019","2020","2021","2022","2023"};
     JComboBox comboBox_1 = new JComboBox(startdateyear);                    //MAKE THE COMBO BOX
-    comboBox_1.setBounds(168, 30, 52, 27);                                  //SET THE POSITION OF THE COMBO BOX
+    comboBox_1.setBounds(168, 30, 87, 27);                                  //SET THE POSITION OF THE COMBO BOX
     frame.getContentPane().add(comboBox_1);                                 //ADD THE COMBO BOX TO THE FRAME
     comboBox_1.addActionListener(new ActionListener()
     {
@@ -149,7 +151,7 @@ public class Letstrythis {
     
     /**********START DATE: MONTH LABEL**********/
     JLabel lblMonth = new JLabel("Month:");                                 //MAKE THE LABEL
-    lblMonth.setBounds(218, 34, 44, 16);                                    //SET THE POSITION OF THE LABEL
+    lblMonth.setBounds(258, 34, 44, 16);                                    //SET THE POSITION OF THE LABEL
     frame.getContentPane().add(lblMonth);                                   //ADD THE LABEL TO THE FRAME
     /**********THIS IS DONE**********/
     
@@ -157,7 +159,7 @@ public class Letstrythis {
     String[] startdatemonth = {"01","02","03","04","05","06","07","08","09",
         "10","11","12"};
     JComboBox comboBox_2 = new JComboBox(startdatemonth);                   //MAKE THE COMBO BOX
-    comboBox_2.setBounds(258, 30, 52, 27);                                  //SET THE POSITION OF THE COMBO BOX
+    comboBox_2.setBounds(299, 30, 67, 27);                                  //SET THE POSITION OF THE COMBO BOX
     frame.getContentPane().add(comboBox_2);                                 //ADD THE COMBO BOX TO THE FRAME
     comboBox_2.addActionListener(new ActionListener()
     {
@@ -170,7 +172,7 @@ public class Letstrythis {
     
     /**********START DATE: DAY LABEL**********/
     JLabel lblDay = new JLabel("Day:");                                     //MAKE THE LABEL
-    lblDay.setBounds(310, 34, 31, 16);                                      //SET THE POSITION OF THE LABEL
+    lblDay.setBounds(368, 34, 31, 16);                                      //SET THE POSITION OF THE LABEL
     frame.getContentPane().add(lblDay);                                     //ADD THE LABEL TO THE FRAME
     /**********THIS IS DONE**********/
     
@@ -179,7 +181,7 @@ public class Letstrythis {
         "10","11","12","13","14","15","16","17","18","19","20","21","22",
         "23","24","25","26","27","28","29","30","31"};
     JComboBox comboBox = new JComboBox(startdateday);                       //MAKE THE COMBO BOX
-    comboBox.setBounds(334, 30, 52, 27);                                    //SET THE POSITION OF THE COMBO BOX
+    comboBox.setBounds(393, 30, 67, 27);                                    //SET THE POSITION OF THE COMBO BOX
     frame.getContentPane().add(comboBox);                                   //ADD THE COMBO BOX TO THE FRAME
     comboBox.addActionListener(new ActionListener()
     {
@@ -189,40 +191,6 @@ public class Letstrythis {
         JOptionPane.showMessageDialog(null, tstartdatep3);
       }
     });
-    
-//    while (test == 1) {
-//      conttest = 1;
-//      System.out
-//          .println("Enter Start date in yearmonthdate format, ex. 20160218:");
-//    tstartdate = ""+tstartdatep1+""+tstartdatep2+""+tstartdatep3;
-//    System.out.println(tstartdate);
-//      if (tstartdate.length() == 8) {
-//        test = 0;
-//      } else {
-//        test = 1;
-//        conttest = 0;
-//        System.out.println("Invalid length");
-//      }
-//      if (conttest == 1) {
-//        int[] chartest = new int[tstartdate.length()];
-//        for (int i = 0; i < tstartdate.length(); i++) {
-//          ascii = (int) tstartdate.charAt(i);
-//          if (ascii >= 48 && ascii <= 57) {
-//            chartest[i] = 1;
-//          } else {
-//            chartest[i] = 0;
-//          }
-//        }
-//        for (int i = 0; i < tstartdate.length(); i++) {
-//          if (chartest[i] == 0) {
-//            System.out.println("Invalid char at position " + i);
-//            test = 1;
-//          }
-//        }
-//      }
-//
-//    }
-//    test = 1;
     
     /*********************************************************
      * END DATE LINE
@@ -239,29 +207,54 @@ public class Letstrythis {
     frame.getContentPane().add(lblYear_1);                                  //ADD THE LABEL TO THE FRAME
     
     /**********END DATE: YEAR COMBO BOX**********/
-    JComboBox comboBox_4 = new JComboBox();                                 //MAKE THE COMBO BOX
-    comboBox_4.setBounds(168, 58, 52, 27);                                  //SET THE POSITION OF THE COMBO BOX
+    JComboBox comboBox_4 = new JComboBox(startdateyear);                    //MAKE THE COMBO BOX
+    comboBox_4.setBounds(168, 58, 87, 27);                                  //SET THE POSITION OF THE COMBO BOX
     frame.getContentPane().add(comboBox_4);                                 //ADD THE COMBO BOX TO THE FRAME
+    comboBox_4.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        tenddatep1 = comboBox_4.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(null, tenddatep1);
+      }
+    });
     
     /**********END DATE: MONTH LABEL**********/
     JLabel lblMonth_1 = new JLabel("Month: ");                              //MAKE THE LABEL
-    lblMonth_1.setBounds(218, 62, 52, 16);                                  //SET THE POSITION OF THE LABEL
+    lblMonth_1.setBounds(258, 62, 52, 16);                                  //SET THE POSITION OF THE LABEL
     frame.getContentPane().add(lblMonth_1);                                 //ADD THE LABEL TO THE FRAME
     
     /**********END DATE: MONTH COMBO BOX**********/
-    JComboBox comboBox_5 = new JComboBox();                                 //MAKE THE COMBO BOX
-    comboBox_5.setBounds(258, 58, 52, 27);                                  //SET THE POSITION OF THE COMBO BOX
+    JComboBox comboBox_5 = new JComboBox(startdatemonth);                   //MAKE THE COMBO BOX
+    comboBox_5.setBounds(299, 58, 67, 27);                                  //SET THE POSITION OF THE COMBO BOX
     frame.getContentPane().add(comboBox_5);                                 //ADD THE COMBO BOX TO THE FRAME
+    comboBox_5.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        tenddatep2 = comboBox_5.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(null, tenddatep2);
+      }
+    });
+    
     
     /**********END DATE: DAY LABEL**********/
     JLabel lblDay_1 = new JLabel("Day:");                                   //MAKE THE LABEL
-    lblDay_1.setBounds(310, 62, 31, 16);                                    //SET THE POSITION OF THE LABEL
+    lblDay_1.setBounds(368, 62, 31, 16);                                    //SET THE POSITION OF THE LABEL
     frame.getContentPane().add(lblDay_1);                                   //ADD THE LABEL TO THE FRAME
     
     /**********END DATE: DAY COMBO BOX**********/
-    JComboBox comboBox_6 = new JComboBox();                                 //MAKE THE COMBO BOX
-    comboBox_6.setBounds(334, 58, 52, 27);                                  //SET THE POSITION OF THE COMBO BOX
+    JComboBox comboBox_6 = new JComboBox(startdateday);                     //MAKE THE COMBO BOX
+    comboBox_6.setBounds(393, 58, 67, 27);                                  //SET THE POSITION OF THE COMBO BOX
     frame.getContentPane().add(comboBox_6);                                 //ADD THE COMBO BOX TO THE FRAME
+    comboBox_6.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        tenddatep3 = comboBox_6.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(null, tenddatep3);
+      }
+    });
     
     /*********************************************************
      * START TIME LINE
@@ -300,9 +293,17 @@ public class Letstrythis {
     frame.getContentPane().add(lblEndTime);                                 //ADD THE LABEL TO THE FRAME
     
     /**********END TIME: COMBO BOX**********/
-    JComboBox comboBox_7 = new JComboBox();                                 //MAKE THE COMBO BOX
+    JComboBox comboBox_7 = new JComboBox(starttimearray);                   //MAKE THE COMBO BOX
     comboBox_7.setBounds(141, 114, 129, 27);                                //SET THE POSITION OF THE COMBO BOX
     frame.getContentPane().add(comboBox_7);                                 //ADD THE COMBO BOX TO THE FRAME
+    comboBox_7.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        tendtime = comboBox_7.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(null, tendtime);
+      }
+    });
     
     /*********************************************************
      * GPS LATITUDE LINE
@@ -323,6 +324,19 @@ public class Letstrythis {
     JButton btnEnter_1 = new JButton("enter");                              //MAKE THE BUTTON
     btnEnter_1.setBounds(268, 141, 76, 29);                                 //SET THE POSITION OF THE BUTTON
     frame.getContentPane().add(btnEnter_1);                                 //ADD THE BUTTON TO THE FRAME
+    btnEnter_1.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        gpslat = textField_2.getText();
+        if(isDouble(gpslat) && Double.parseDouble(gpslat) > -90 && Double.parseDouble(gpslat) < 90){
+          JOptionPane.showMessageDialog(null, gpslat);
+        }
+        else{
+          textField_2.setText("0");
+        }
+      }
+    });
     
     /*********************************************************
      * GPS LONGITUDE LINE
@@ -343,20 +357,42 @@ public class Letstrythis {
     JButton btnNewButton = new JButton("enter");                            //MAKE THE BUTTON
     btnNewButton.setBounds(268, 169, 76, 29);                               //SET THE POSITION OF THE BUTTON
     frame.getContentPane().add(btnNewButton);                               //ADD THE BUTTON TO THE FRAME
+    btnNewButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        gpslong = textField_3.getText();
+        if(isDouble(gpslong)&& Double.parseDouble(gpslong) > 0 && Double.parseDouble(gpslong) < 180){
+          JOptionPane.showMessageDialog(null, gpslong);
+        }
+        else{
+          textField_3.setText("0");
+        }
+      }
+    });
     
     /*********************************************************
      * CLASS OF EVENT LINE
      *********************************************************/
     
     /**********CLASS OF EVENT: LABEL**********/
+    String[] classeventlist = {"PUBLIC", "PRIVATE", "CONFIDENTIAL"};
     JLabel lblClassOfEvent = new JLabel("Class of Event:");                 //MAKE THE LABEL
     lblClassOfEvent.setBounds(6, 202, 100, 16);                             //SET THE POSITION OF THE LABEL
     frame.getContentPane().add(lblClassOfEvent);                            //ADD THE LABEL TO THE FRAME
     
     /**********CLASS OF EVENT: COMBO BOX**********/
-    JComboBox comboBox_8 = new JComboBox();                                 //MAKE THE COMBO BOX
+    JComboBox comboBox_8 = new JComboBox(classeventlist);                   //MAKE THE COMBO BOX
     comboBox_8.setBounds(141, 198, 129, 27);                                //SET THE POSITION OF THE COMBO BOX
     frame.getContentPane().add(comboBox_8);                                 //ADD THE COMBO BOX TO THE FRAME
+    comboBox_8.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        clas = comboBox_8.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(null, clas);
+      }
+    });
     
     /*********************************************************
      * ENTER MESSAGE LINE
@@ -367,11 +403,6 @@ public class Letstrythis {
     lblEnterMessage.setBounds(6, 230, 100, 16);                             //SET THE POSITION OF THE LABEL
     frame.getContentPane().add(lblEnterMessage);
     
-    /**********ENTER MESSAGE: ENTER BUTTON**********/
-    JButton btnEnter_2 = new JButton("enter");                              //MAKE THE BUTTON
-    btnEnter_2.setBounds(524, 225, 76, 29);                                 //SET THE POSITION OF THE BUTTON
-    frame.getContentPane().add(btnEnter_2);                                 //ADD THE BUTTON TO THE FRAME
-    
     /**********ENTER MESSAGE: TEXT AREA**********/
     JTextArea textArea = new JTextArea();                                   //MAKE THE TEXT AREA
     JScrollPane scroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -379,5 +410,75 @@ public class Letstrythis {
     textArea.setLineWrap(true);                                             //MAKE THE TEXT WRAP
     textArea.setWrapStyleWord(true);                                        //MAKE THE WORDS WRAP
     frame.getContentPane().add(scroll);                                     //ADD THE SCROLLABLE TEXT AREA TO THE FRAME
+    
+    /**********ENTER MESSAGE: ENTER BUTTON**********/
+    JButton btnEnter_2 = new JButton("enter");                              //MAKE THE BUTTON
+    btnEnter_2.setBounds(524, 225, 76, 29);                                 //SET THE POSITION OF THE BUTTON
+    frame.getContentPane().add(btnEnter_2);                                 //ADD THE BUTTON TO THE FRAME
+    btnEnter_2.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        msg = textArea.getText();
+        JOptionPane.showMessageDialog(null, msg);
+      }
+    });
+    
+    /**********DONE BUTTON**********/
+    JButton btnDone = new JButton("Done");
+    btnDone.setBounds(513, 1, 87, 28);
+    frame.getContentPane().add(btnDone);
+    btnDone.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        JOptionPane.showMessageDialog(null, "Creating Calendar!");
+        try {
+          tstartdate = tstartdatep1 + tstartdatep2 + tstartdatep3;
+          tstart = tstartdate + "T" + tstarttime;
+          tenddate = tenddatep1 + tenddatep2 + tenddatep3;
+          tend = tenddate + "T" + tendtime;
+          createics(calname, tstart, tend, msg, gpslat, gpslong, clas);
+        }
+        catch (IOException e1) {
+          // TODO Auto-generated catch block
+          System.out.println("btnDone: IOException caught!");
+        }
+      }
+    });
+  }
+  public boolean isDouble(String str){
+    try{
+      Double.parseDouble(str);
+      return true;
+    }catch(NumberFormatException e){
+      return false;
+    }
+  }
+  
+  private static void createics(String name, String start, String end,
+      String msg, String gpsla, String gpslo, String clas)
+      throws IOException {
+    FileWriter write = new FileWriter("ics314.ics");
+
+    write.write("BEGIN:VCALENDAR" + '\n'
+        + "PRODID:-//Google Inc//Google Calendar 70.9054//EN" + '\n'
+        + "VERSION:2.0" + '\n' + "CALSCALE:GREGORIAN" + '\n'
+        + "METHOD:PUBLISH" + '\n' + "X-WR-CALNAME:");
+    write.write((name + '\n'));
+    write.write("X-WR-TIMEZONE:Pacific/Honolulu\nBEGIN:VEVENT\nDTSTART:");
+    write.write((start + '\n'));
+    write.write("DTEND:");
+    write.write((end + '\n'));
+    write.write("GEO:");
+    write.write((gpsla + ";" + gpslo + '\n'));
+    write.write("CLASS:");
+    write.write((clas + '\n'));
+    write.write("UID:tccsg6j6deenb9gr61l0h7gcas@google.com\nDESCRIPTION:\nLOCATION:\nSEQUENCE:3\nSTATUS:CONFIRMED\nSUMMARY:");
+    write.write((msg + '\n'));
+    write.write("TRANSP:OPAQUE\nEND:VEVENT\nEND:VCALENDAR\n");
+
+    write.close();
   }
 }
+

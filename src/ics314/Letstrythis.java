@@ -503,7 +503,6 @@ public class Letstrythis {
     {
       public void actionPerformed(ActionEvent e)
       {
-        JOptionPane.showMessageDialog(null, "Creating Calendar!");
         try {
           filename = textField_1.getText() + ".ics";
           tstarttime = tstarttimep1 + tstarttimep2 + "00";
@@ -514,18 +513,29 @@ public class Letstrythis {
           tend = tenddate + "T" + tendtime;
           msg = textArea.getText();
           
-          System.out.println(filename);
-          System.out.println(tstart);
-          System.out.println(tend);
-          System.out.println(msg);
-          System.out.println(gpslat);
-          System.out.println(gpslong);
-          System.out.println(clas);
-          createics(filename, tstart, tend, msg, gpslat, gpslong, clas);
-          textField_1.setText("default"); // filename
-          textField_2.setText("0"); // gpslat
-          textField_3.setText("1"); // gpslong
-          textArea.setText(""); // msg
+          if(isDouble(textField_3.getText())&& Double.parseDouble(textField_3.getText()) > 0 && Double.parseDouble(textField_3.getText()) < 180
+              && isDouble(textField_2.getText()) && Double.parseDouble(textField_2.getText()) > -90 && Double.parseDouble(textField_2.getText()) < 90){
+            gpslat = textField_2.getText();
+            gpslong = textField_3.getText();
+            System.out.println(filename);
+            System.out.println(tstart);
+            System.out.println(tend);
+            System.out.println(msg);
+            System.out.println(gpslat);
+            System.out.println(gpslong);
+            System.out.println(clas);
+            createics(filename, tstart, tend, msg, gpslat, gpslong, clas);
+            JOptionPane.showMessageDialog(null, "Calendar Created!");
+            textField_1.setText("default"); // filename
+            textField_2.setText("0"); // gpslat
+            textField_3.setText("1"); // gpslong
+            textArea.setText(""); // msg
+          }
+          else{
+            textField_2.setText("0");
+            textField_3.setText("1");
+            JOptionPane.showMessageDialog(null, "Input error: GPS Lattitude/Longitude... Setting Default Values");
+          }
         }
         catch (IOException e1) {
           // TODO Auto-generated catch block

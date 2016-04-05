@@ -1,14 +1,20 @@
 package guitest;
 
+import ics314.TimeSort;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.BorderFactory;
@@ -103,6 +109,7 @@ public class Letstrythis {
    * Initialize the contents of the frame.
    */
   private void initialize() throws IOException{
+	ArrayList<String> list = new ArrayList<String>();
     frame = new JFrame();
     frame.setBounds(100, 100, 600, 400);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,7 +121,7 @@ public class Letstrythis {
     
     /**********ENTER CALENDAR NAME: LABEL**********/
     //ENTER CALENDAR NAME: LABEL
-    JLabel lblEnterCalendarName = new JLabel("Enter Calendar Name:");       //MAKE THE LABEL
+    JLabel lblEnterCalendarName = new JLabel("Enter File Name:");       //MAKE THE LABEL
     lblEnterCalendarName.setBounds(6, 6, 141, 16);                          //SET THE POSITION OF THE LABEL
     frame.getContentPane().add(lblEnterCalendarName);                       //ADD THE LABEL TO THE FRAME
     /**********THIS IS DONE**********/
@@ -524,6 +531,12 @@ public class Letstrythis {
             System.out.println(gpslat);
             System.out.println(gpslong);
             System.out.println(clas);
+            list.add(filename);
+//    		list.add("f1.ics");
+//    		list.add("f2.ics");
+//    		list.add("f3.ics");
+//    		list.add("f4.ics");
+//    		list.add("f5.ics");
             createics(filename, tstart, tend, msg, gpslat, gpslong, clas);
             JOptionPane.showMessageDialog(null, "Calendar Created!");
             textField_1.setText("default"); // filename
@@ -543,7 +556,29 @@ public class Letstrythis {
         }
       }
     });
-    
+    frame.addWindowListener(new WindowAdapter()
+    {
+    	@Override
+		public void windowClosing(WindowEvent event) {
+//			// TODO Auto-generated method stub
+//    		list.add("f1.ics");
+//    		list.add("f2.ics");
+//    		list.add("f3.ics");
+//    		list.add("f4.ics");
+//    		list.add("f5.ics");
+		for(int i = 0; i < list.size(); i ++){
+		System.out.println(list.get(i));
+	}
+			try {
+				TimeSort.startsort(list);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.exit(0);
+			
+		}
+    });
   }
   public boolean isDouble(String str){
     try{
@@ -562,7 +597,7 @@ public class Letstrythis {
     write.write("BEGIN:VCALENDAR" + '\n'
         + "PRODID:-//Google Inc//Google Calendar 70.9054//EN" + '\n'
         + "VERSION:2.0" + '\n' + "CALSCALE:GREGORIAN" + '\n'
-        + "METHOD:PUBLISH" + '\n' + "X-WR-CALyNAME:");
+        + "METHOD:PUBLISH" + '\n' + "X-WR-CALNAME:");
     write.write((name + '\n'));
     write.write("X-WR-TIMEZONE:Pacific/Honolulu\nBEGIN:VEVENT\nDTSTART:");
     write.write((start + '\n'));
@@ -579,4 +614,3 @@ public class Letstrythis {
     write.close();
   }
 }
-

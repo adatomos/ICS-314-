@@ -27,7 +27,7 @@ import javax.swing.JScrollBar;
 
 public class Letstrythis {
 
-  private String calname = "default";
+  private String filename = "default";
   private String tstartdatep1 = "";
   private String tstartdatep2 = "";
   private String tstartdatep3 = "";
@@ -114,8 +114,8 @@ public class Letstrythis {
     {
       public void actionPerformed(ActionEvent e)
       {
-        calname = textField_1.getText();
-        JOptionPane.showMessageDialog(null, calname);
+        filename = textField_1.getText() + ".ics";
+        //JOptionPane.showMessageDialog(null, calname);
       }
     });
     
@@ -145,7 +145,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         tstartdatep1 = comboBox_1.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, tstartdatep1);
+        //JOptionPane.showMessageDialog(null, tstartdatep1);
       }
     });
     
@@ -166,7 +166,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         tstartdatep2 = comboBox_2.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, tstartdatep2);
+        //JOptionPane.showMessageDialog(null, tstartdatep2);
       }
     });
     
@@ -188,7 +188,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         tstartdatep3 = comboBox.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, tstartdatep3);
+        //JOptionPane.showMessageDialog(null, tstartdatep3);
       }
     });
     
@@ -215,7 +215,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         tenddatep1 = comboBox_4.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, tenddatep1);
+        //JOptionPane.showMessageDialog(null, tenddatep1);
       }
     });
     
@@ -233,7 +233,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         tenddatep2 = comboBox_5.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, tenddatep2);
+        //JOptionPane.showMessageDialog(null, tenddatep2);
       }
     });
     
@@ -252,7 +252,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         tenddatep3 = comboBox_6.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, tenddatep3);
+        //JOptionPane.showMessageDialog(null, tenddatep3);
       }
     });
     
@@ -278,7 +278,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         tstarttime = comboBox_3.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, tstarttime);
+        //JOptionPane.showMessageDialog(null, tstarttime);
       }
     });
     
@@ -301,7 +301,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         tendtime = comboBox_7.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, tendtime);
+        //JOptionPane.showMessageDialog(null, tendtime);
       }
     });
     
@@ -328,12 +328,13 @@ public class Letstrythis {
     {
       public void actionPerformed(ActionEvent e)
       {
-        gpslat = textField_2.getText();
-        if(isDouble(gpslat) && Double.parseDouble(gpslat) > -90 && Double.parseDouble(gpslat) < 90){
-          JOptionPane.showMessageDialog(null, gpslat);
+        if(isDouble(textField_2.getText()) && Double.parseDouble(textField_2.getText()) > -90 && Double.parseDouble(textField_2.getText()) < 90){
+          gpslat = textField_2.getText();
+          //JOptionPane.showMessageDialog(null, "Success");
         }
         else{
           textField_2.setText("0");
+          JOptionPane.showMessageDialog(null, "Please enter a number between -90 and 90");
         }
       }
     });
@@ -361,12 +362,13 @@ public class Letstrythis {
     {
       public void actionPerformed(ActionEvent e)
       {
-        gpslong = textField_3.getText();
-        if(isDouble(gpslong)&& Double.parseDouble(gpslong) > 0 && Double.parseDouble(gpslong) < 180){
-          JOptionPane.showMessageDialog(null, gpslong);
+        if(isDouble(textField_3.getText())&& Double.parseDouble(textField_3.getText()) > 0 && Double.parseDouble(textField_3.getText()) < 180){
+          gpslong = textField_3.getText();
+          //JOptionPane.showMessageDialog(null, "Success");
         }
         else{
           textField_3.setText("0");
+          JOptionPane.showMessageDialog(null, "Please enter a number between 0 and 180");
         }
       }
     });
@@ -390,7 +392,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         clas = comboBox_8.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null, clas);
+        //JOptionPane.showMessageDialog(null, clas);
       }
     });
     
@@ -420,7 +422,7 @@ public class Letstrythis {
       public void actionPerformed(ActionEvent e)
       {
         msg = textArea.getText();
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
       }
     });
     
@@ -438,7 +440,7 @@ public class Letstrythis {
           tstart = tstartdate + "T" + tstarttime;
           tenddate = tenddatep1 + tenddatep2 + tenddatep3;
           tend = tenddate + "T" + tendtime;
-          createics(calname, tstart, tend, msg, gpslat, gpslong, clas);
+          createics(filename, tstart, tend, msg, gpslat, gpslong, clas);
         }
         catch (IOException e1) {
           // TODO Auto-generated catch block
@@ -459,12 +461,12 @@ public class Letstrythis {
   private static void createics(String name, String start, String end,
       String msg, String gpsla, String gpslo, String clas)
       throws IOException {
-    FileWriter write = new FileWriter("ics314.ics");
+    FileWriter write = new FileWriter(name);
 
     write.write("BEGIN:VCALENDAR" + '\n'
         + "PRODID:-//Google Inc//Google Calendar 70.9054//EN" + '\n'
         + "VERSION:2.0" + '\n' + "CALSCALE:GREGORIAN" + '\n'
-        + "METHOD:PUBLISH" + '\n' + "X-WR-CALNAME:");
+        + "METHOD:PUBLISH" + '\n' + "X-WR-CALyNAME:");
     write.write((name + '\n'));
     write.write("X-WR-TIMEZONE:Pacific/Honolulu\nBEGIN:VEVENT\nDTSTART:");
     write.write((start + '\n'));

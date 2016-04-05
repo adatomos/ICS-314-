@@ -9,13 +9,13 @@ import java.util.Scanner;
 
 public class TimeSort {
 
-
 	public static void startsort(ArrayList<String> args) throws IOException {
 		if (args.size() < 2) {
-			System.out.println("Need more than 1 .ics file");
+			System.out
+					.println("Need more than 1 .ics file for Great Circle Distance");
 		} else {
 			String[] names = new String[args.size()];
-			for(int i = 0; i < args.size(); i++){
+			for (int i = 0; i < args.size(); i++) {
 				names[i] = args.get(i);
 			}
 			int[] times = new int[args.size()];
@@ -29,7 +29,12 @@ public class TimeSort {
 
 			Arrays.sort(cals, new caltimeComp());
 
-			 addcircledist(cals);
+//			for (int i = 0; i < names.length; i++) {
+//				System.out.println(cals[i].getTime() + " "
+//						+ cals[i].getFilename());
+//			}
+
+			addcircledist(cals);
 		}
 	}
 
@@ -54,16 +59,43 @@ public class TimeSort {
 		return time;
 	}
 
-	public static void addcircledist(caltime[] cals) throws IOException{
-		float[] deg1,deg2, dist;
-		for(int i = 0; i < (cals.length - 1); i++){
-			deg1 = GreatCircleDistance.GetGeo(cals[i].getFilename());
-			deg2 = GreatCircleDistance.GetGeo(cals[i+1].getFilename());
-			dist = GreatCircleDistance.GreatCircleDist(deg1[0], deg1[1], deg2[0], deg2[1]);
-			System.out.println(deg1[0] + " " + deg1[1] + " "  + deg2[0] + " " + deg2[1] + " "  + dist[0] + " " + dist[1]);
-			GreatCircleDistance.AddComment(cals[i].getFilename(), dist[0], dist[1]);
-			if(i == (cals.length -2)){
-				GreatCircleDistance.AddCommentLastEvent(cals[i+1].getFilename());
+	public static void addcircledist(caltime[] cals) throws IOException {
+		float[] deg1, deg2, dist;
+		for (int i = 0, j = 1; j < cals.length; i++, j++) {
+//			System.out.println("i is "
+//					+ GreatCircleDistance.IfGotGeo(cals[i].getFilename())
+//					+ "j is "
+//					+ GreatCircleDistance.IfGotGeo(cals[j].getFilename()));
+			if (GreatCircleDistance.IfGotGeo(cals[i].getFilename())
+					&& GreatCircleDistance.IfGotGeo(cals[j].getFilename())) {
+				//System.out.println("Has geo at " + i + "and " + j);
+				deg1 = GreatCircleDistance.GetGeo(cals[i].getFilename());
+				deg2 = GreatCircleDistance.GetGeo(cals[j].getFilename());
+				dist = GreatCircleDistance.GreatCircleDist(deg1[0], deg1[1],
+						deg2[0], deg2[1]);
+				// System.out.println(deg1[0] + " " + deg1[1] + " " + deg2[0]
+				// + " " + deg2[1] + " " + dist[0] + " " + dist[1]);
+				GreatCircleDistance.AddComment(cals[i].getFilename(), dist[0],
+						dist[1]);
+				if (j == (cals.length - 1)) {
+					GreatCircleDistance.AddCommentLastEvent(cals[j]
+							.getFilename());
+				}
+			} else if (GreatCircleDistance.IfGotGeo(cals[i].getFilename())
+					&& !GreatCircleDistance.IfGotGeo(cals[j].getFilename())
+					&& j < (cals.length - 1)) {
+				//System.out.println("Made it " + i + " " + j);
+				for (j++; j < (cals.length - 1); j++) {
+					if (GreatCircleDistance.IfGotGeo(cals[j].getFilename())) {
+						j--; // cancel out outer for loop i++, j++
+						i--;
+						break;
+					}
+				}
+			} else if (GreatCircleDistance.IfGotGeo(cals[i].getFilename())
+					&& !GreatCircleDistance.IfGotGeo(cals[j].getFilename())
+					&& j == (cals.length - 1)) {
+				GreatCircleDistance.AddCommentLastEvent(cals[j].getFilename());
 			}
 		}
 	}

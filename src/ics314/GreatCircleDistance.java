@@ -138,7 +138,7 @@ public class GreatCircleDistance {
    */
         public static Boolean IfGotGeo(String FileName){
         String[] str = new String[2];
-        String str1 = ":"; boolean bool = true;
+        String str1 = ":;"; boolean bool = true;
         File file =new File(FileName);
         Scanner in = null;
         try {
@@ -148,6 +148,7 @@ public class GreatCircleDistance {
                 String line=in.nextLine();
                 if(line.contains("GEO")){
                    str = line.split("O");
+                   //System.out.println(str[1]);
                    if(str[1].compareTo(str1)==0){
                        bool = false;
                    }

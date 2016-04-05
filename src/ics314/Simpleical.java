@@ -13,17 +13,24 @@ public class Simpleical {
 		int loop = 1;
 		String ans = "";
 		ArrayList<String> list = new ArrayList<String>();
-		while (loop == 1) {
-			System.out.println("Create new file? y/n:");
-			ans = input.nextLine();
-			if (ans.equals("y")) {
-				list.add(userinter());
-			} else if (ans.equals("n")) {
-				loop = 0;
-			} else {
-				System.out.println("Invalid input, needs y or n");
-			}
-		}
+//		while (loop == 1) {
+//			System.out.println("Create new file? y/n:");
+//			ans = input.nextLine();
+//			if (ans.equals("y")) {
+//				list.add(userinter());
+//			} else if (ans.equals("n")) {
+//				loop = 0;
+//			} else {
+//				System.out.println("Invalid input, needs y or n");
+//			}
+//		}
+		list.add("f1.ics");
+		list.add("f2.ics");
+		list.add("f3.ics");
+		list.add("f4.ics");
+//		for(int i = 0; i < list.size(); i ++){
+//			System.out.println(list.get(i));
+//		}
 		TimeSort.startsort(list);
 		input.close();
 		
@@ -195,7 +202,7 @@ public class Simpleical {
 			System.out
 					.println("Enter GPS latitude if applicable, leave blank if not, ex. 37.386013 :");
 			gpslat = input.nextLine();
-			if (gpslat == "") {
+			if (gpslat.equals("")) {
 				conttest = 0;
 				test = 0;
 			}
@@ -255,7 +262,7 @@ public class Simpleical {
 			System.out
 					.println("Enter GPS longitude if applicable, leave blank if not, ex. 37.386013 :");
 			gpslong = input.nextLine();
-			if (gpslat == "") {
+			if (gpslat.equals("")) {
 				conttest = 0;
 				test = 0;
 			}

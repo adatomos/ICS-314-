@@ -82,7 +82,7 @@ public class GreatCircleDistance {
         File inFile = new File(FileName);
         File outFile = new File("TEMP.tmp");
             try ( //input
-                    FileInputStream fis = new FileInputStream(FileName)) {
+                    FileInputStream fis = new FileInputStream(inFile)) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(fis));
                 // output
                 FileOutputStream fos = new FileOutputStream(outFile);

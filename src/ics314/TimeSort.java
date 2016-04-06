@@ -29,10 +29,10 @@ public class TimeSort {
 
 			Arrays.sort(cals, new caltimeComp());
 
-//			for (int i = 0; i < names.length; i++) {
-//				System.out.println(cals[i].getTime() + " "
-//						+ cals[i].getFilename());
-//			}
+			for (int i = 0; i < names.length; i++) {
+				System.out.println(cals[i].getTime() + " "
+						+ cals[i].getFilename());
+			}
 
 			addcircledist(cals);
 		}
@@ -53,22 +53,24 @@ public class TimeSort {
 					// System.out.println(time);
 				}
 			}
+			in.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
 		return time;
 	}
 
 	public static void addcircledist(caltime[] cals) throws IOException {
 		float[] deg1, deg2, dist;
 		for (int i = 0, j = 1; j < cals.length; i++, j++) {
-//			System.out.println("i is "
-//					+ GreatCircleDistance.IfGotGeo(cals[i].getFilename())
-//					+ "j is "
-//					+ GreatCircleDistance.IfGotGeo(cals[j].getFilename()));
+			System.out.println(i + " is "
+					+ GreatCircleDistance.IfGotGeo(cals[i].getFilename())
+					+ j + " is "
+					+ GreatCircleDistance.IfGotGeo(cals[j].getFilename()));
 			if (GreatCircleDistance.IfGotGeo(cals[i].getFilename())
 					&& GreatCircleDistance.IfGotGeo(cals[j].getFilename())) {
-				//System.out.println("Has geo at " + i + "and " + j);
+				System.out.println("Has geo at " + i + "and " + j);
 				deg1 = GreatCircleDistance.GetGeo(cals[i].getFilename());
 				deg2 = GreatCircleDistance.GetGeo(cals[j].getFilename());
 				dist = GreatCircleDistance.GreatCircleDist(deg1[0], deg1[1],
@@ -77,6 +79,11 @@ public class TimeSort {
 				// + " " + deg2[1] + " " + dist[0] + " " + dist[1]);
 				GreatCircleDistance.AddComment(cals[i].getFilename(), dist[0],
 						dist[1]);
+				
+//				File del = new File(cals[i].getFilename());
+//				File rename = new File(cals[i].getFilename() + "TEMP");
+//				System.out.println("Deleting " + cals[i].getFilename() + " = " + del.delete());
+//				System.out.println("Renaming " + cals[i].getFilename() + " = " + rename.renameTo(del));
 				if (j == (cals.length - 1)) {
 					GreatCircleDistance.AddCommentLastEvent(cals[j]
 							.getFilename());

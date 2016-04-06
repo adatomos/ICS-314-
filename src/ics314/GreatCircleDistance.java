@@ -69,6 +69,7 @@ public class GreatCircleDistance {
                    degrees[1] = Float.parseFloat(str1[1]);
                 }
             }
+            in.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } return degrees;
@@ -84,7 +85,7 @@ public class GreatCircleDistance {
        BufferedReader in = null;
        FileOutputStream fos = null;
        File inFile = new File(FileName);
-       File outFile = new File("TEMP");
+       File outFile = new File(FileName + "TEMP");
             try { //input
                      fis = new FileInputStream(inFile); 
                      in = new BufferedReader(new InputStreamReader(fis)); 
@@ -165,6 +166,7 @@ public class GreatCircleDistance {
                    else bool = true;
                 }
             }
+            in.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

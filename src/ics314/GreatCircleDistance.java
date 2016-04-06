@@ -78,29 +78,33 @@ public class GreatCircleDistance {
    * input parameters: FileName  ex: ics314.ics; distance in km; distance in miles (calculated
    *    using GreatCircleDist)
    */
-    public static void AddComment(String FileName, float DistKM, float DistMI) throws IOException{
+   public void AddComment(String FileName, float DistKM, float DistMI) throws IOException{
+       String str = FileName;
+       FileInputStream fis = null;
+       BufferedReader in = null;
         File inFile = new File(FileName);
-        File outFile = new File("TEMP.tmp");
-            try ( //input
-                    FileInputStream fis = new FileInputStream(inFile)) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+        File outFile = new File("TEMP");
+            try { //input
+                     fis = new FileInputStream(inFile); 
+                     in = new BufferedReader(new InputStreamReader(fis)); 
                 // output
                 FileOutputStream fos = new FileOutputStream(outFile);
-                PrintWriter out = new PrintWriter(fos);
-                String thisLine = "";
-                while ((thisLine = in.readLine()) != null) {
-                    if(thisLine.contains("DTSTART"))out.println("COMMENT:distance to next event in kilometers "+DistKM+"; in miles "+DistMI);
-                    out.println(thisLine);
-                }
-                out.flush();
-                out.close();
-                in.close();
-                fos.close();
-            }
-    System.gc();  // funny when I ran this again the inFile was not deleted, so I put this in and it worked.
-    
-    inFile.delete();
-    outFile.renameTo(inFile);      
+           try (PrintWriter out = new PrintWriter(fos)) {
+               String thisLine = "";
+               while ((thisLine = in.readLine()) != null) {
+                   if(thisLine.contains("DTSTART"))out.println("COMMENT:distance to next event in kilometers "+DistKM+"; in miles "+DistMI);
+                   out.println(thisLine);
+               }
+               out.flush();
+           }
+            }finally {
+            if (fis!= null)
+            fis.close();
+            if (in!= null)
+            in.close();
+      }
+     inFile.delete();
+    outFile.renameTo(inFile); 
     }
        /** 
    * AddCommentLastEvent method adds COMMENT field to the last .ics file. The COMMENT 

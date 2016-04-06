@@ -78,17 +78,18 @@ public class GreatCircleDistance {
    * input parameters: FileName  ex: ics314.ics; distance in km; distance in miles (calculated
    *    using GreatCircleDist)
    */
-   public void AddComment(String FileName, float DistKM, float DistMI) throws IOException{
+   public static void AddComment(String FileName, float DistKM, float DistMI) throws IOException{
        String str = FileName;
        FileInputStream fis = null;
        BufferedReader in = null;
-        File inFile = new File(FileName);
-        File outFile = new File("TEMP");
+       FileOutputStream fos = null;
+       File inFile = new File(FileName);
+       File outFile = new File("TEMP");
             try { //input
                      fis = new FileInputStream(inFile); 
                      in = new BufferedReader(new InputStreamReader(fis)); 
                 // output
-                FileOutputStream fos = new FileOutputStream(outFile);
+                 fos = new FileOutputStream(outFile);
            try (PrintWriter out = new PrintWriter(fos)) {
                String thisLine = "";
                while ((thisLine = in.readLine()) != null) {
@@ -102,6 +103,8 @@ public class GreatCircleDistance {
             fis.close();
             if (in!= null)
             in.close();
+            if (fos!= null)
+            fos.close();
       }
      inFile.delete();
     outFile.renameTo(inFile); 

@@ -97,6 +97,9 @@ public class GreatCircleDistance {
                    out.println(thisLine);
                }
                out.flush();
+               out.close();
+           }catch (Exception ex) {
+                ex.printStackTrace();
            }
             }finally {
             if (fis!= null)

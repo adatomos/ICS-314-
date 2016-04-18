@@ -9,31 +9,43 @@ public class Simpleical {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		Scanner input = new Scanner(System.in);;
-		int loop = 1;
-		String ans = "";
-		ArrayList<String> list = new ArrayList<String>();
-		while (loop == 1) {
-			System.out.println("Create new file? y/n:");
-			ans = input.nextLine();
-			if (ans.equals("y")) {
-				list.add(userinter());
-			} else if (ans.equals("n")) {
-				loop = 0;
-			} else {
-				System.out.println("Invalid input, needs y or n");
-			}
-		}
-//		list.add("f1.ics");
-//		list.add("f2.ics");
-//		list.add("f3.ics");
-//		list.add("f4.ics");
-////		for(int i = 0; i < list.size(); i ++){
-////			System.out.println(list.get(i));
-////		}
+            int usrInput=0;
+            Scanner input = new Scanner(System.in);;
+            String str = "";
+            ArrayList<String> list = new ArrayList<String>();
+            System.out.println("Would you like to enter files using arguments?  enter 1: \n "
+                + " Or would you like to automaticallly add files?  enter 2: ");
+            while(true){
+                str = input.nextLine();
+                    if (!str.equals("1")&& !str.equals("2")){
+                        System.out.println("Please enter 1 or 2");
+                    }
+                    else {break;}                        
+                } 
+            if(str.equals("1")){
+                for (int i = 0; i < args.length; i++){
+                    list.add(args[i]);
+                }
+            } 
+            else{
+                System.out.println("Please enter number of event files: ");
+            while(true){   
+                if(input.hasNextInt()){   
+                    usrInput = input.nextInt();
+                if(1 <= usrInput)
+                    break;
+                else
+                    continue;
+                }
+                input.nextLine();  //Comsume the garbage value
+                    System.out.println("Enter an integer greater than 0:");
+                }               
+                for(int i=1; i<= usrInput;i++){
+                    list.add(i+".ics");
+                }
+            }
+                input.close();
 		TimeSort.startsort(list);
-		input.close();
-		
 	}
 
 	public static String userinter() throws IOException {

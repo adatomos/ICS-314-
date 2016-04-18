@@ -80,7 +80,7 @@ public class GreatCircleDistance {
    *    using GreatCircleDist)
    */
    public static void AddComment(String FileName, float DistKM, float DistMI) throws IOException{
-       String str = FileName;
+//       String str = FileName;
        FileInputStream fis = null;
        BufferedReader in = null;
        FileOutputStream fos = null;
@@ -94,8 +94,10 @@ public class GreatCircleDistance {
            try (PrintWriter out = new PrintWriter(fos)) {
                String thisLine = "";
                while ((thisLine = in.readLine()) != null) {
-                   if(thisLine.contains("DTSTART"))out.println("COMMENT:distance to next event in kilometers "+DistKM+"; in miles "+DistMI);
-                   out.println(thisLine);
+                   if(!thisLine.contains("COMMENT")){
+                        out.println(thisLine);
+                        if(thisLine.contains("BEGIN:VEVENT"))out.println("COMMENT:distance to next event in kilometers "+DistKM+"; in miles "+DistMI);
+                    }
                }
                out.flush();
                out.close();
@@ -129,8 +131,10 @@ public class GreatCircleDistance {
                 PrintWriter out = new PrintWriter(fos);
                 String thisLine = "";
                 while ((thisLine = in.readLine()) != null) {
-                    if(thisLine.contains("DTSTART"))out.println("COMMENT:This is the last event");
-                    out.println(thisLine);
+                    if(!thisLine.contains("COMMENT")){
+                        out.println(thisLine);
+                        if(thisLine.contains("BEGIN:VEVENT"))out.println("COMMENT:This is the last event with GPS location");
+                    }
                 }
                 out.flush();
                 out.close();
@@ -149,7 +153,7 @@ public class GreatCircleDistance {
    */
         public static Boolean IfGotGeo(String FileName){
         String[] str = new String[2];
-        String str1 = ":;"; boolean bool = true;
+        String str1 = ":"; boolean bool = true;
         File file =new File(FileName);
         Scanner in = null;
         try {
@@ -172,4 +176,66 @@ public class GreatCircleDistance {
         }
         return bool;
   }
+   /** 
+   * AddCommentEventNoLocation method adds COMMENT field to the last .ics file with no location The COMMENT 
+   *     line is inserted before the DTSTART field indicating that this event has no location
+   * input parameters: FileName of last event ex: ics314.ics 
+   */
+    public static void AddCommentEventNoLocation(String FileName) throws IOException{
+        File inFile = new File(FileName);
+        File outFile = new File("TEMP3.tmp");
+            try ( //input
+                    FileInputStream fis = new FileInputStream(inFile)) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+                // output
+                FileOutputStream fos = new FileOutputStream(outFile);
+                PrintWriter out = new PrintWriter(fos);
+                String thisLine = "";
+                while ((thisLine = in.readLine()) != null) {
+                   if(!thisLine.contains("COMMENT")){
+                        out.println(thisLine);
+                        if(thisLine.contains("BEGIN:VEVENT"))out.println("COMMENT:This event has no GPS location");
+                    }
+                }
+                out.flush();
+                out.close();
+                in.close();
+                fos.close();
+            }
+    System.gc();  
+    
+    inFile.delete();
+    outFile.renameTo(inFile);      
+    }
+       /** 
+   * AddCommentOnlyEventWithLocation method adds COMMENT field to the last .ics file with no location The COMMENT 
+   *     line is inserted before the DTSTART field indicating that this event is the only event is the array that has a location
+   * input parameters: FileName of last event ex: ics314.ics 
+   */
+    public static void AddCommentOnlyEventWithLocation(String FileName) throws IOException{
+        File inFile = new File(FileName);
+        File outFile = new File("TEMP4.tmp");
+            try ( //input
+                    FileInputStream fis = new FileInputStream(inFile)) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+                // output
+                FileOutputStream fos = new FileOutputStream(outFile);
+                PrintWriter out = new PrintWriter(fos);
+                String thisLine = "";
+                while ((thisLine = in.readLine()) != null) {
+                   if(!thisLine.contains("COMMENT")){
+                        out.println(thisLine);
+                        if(thisLine.contains("BEGIN:VEVENT"))out.println("COMMENT:This event is the only event with GPS location");
+                    }
+                }
+                out.flush();
+                out.close();
+                in.close();
+                fos.close();
+            }
+    System.gc();  
+    
+    inFile.delete();
+    outFile.renameTo(inFile);      
+    }
 }

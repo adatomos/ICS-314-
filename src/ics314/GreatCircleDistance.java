@@ -133,7 +133,7 @@ public class GreatCircleDistance {
                 while ((thisLine = in.readLine()) != null) {
                     if(!thisLine.contains("COMMENT")){
                         out.println(thisLine);
-                        if(thisLine.contains("BEGIN:VEVENT"))out.println("COMMENT:This is the last event with GPS location");
+                        if(thisLine.contains("BEGIN:VEVENT"))out.println("COMMENT:This is the last event with GPS location at this date");
                     }
                 }
                 out.flush();

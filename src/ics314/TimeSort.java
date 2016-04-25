@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class TimeSort {
 
 	/**
+	 * startsort sorts the given files by their date and time then passes the data to addcircledist
 	 * @param args
 	 * @throws IOException
 	 */
@@ -65,6 +66,7 @@ public class TimeSort {
 	}
 
 	/**
+	 * findstartdate finds the starting date in the .ics file
 	 * @param filename
 	 * @return
 	 */
@@ -92,6 +94,7 @@ public class TimeSort {
 	}
 
 	/**
+	 * findstarttime finds the starting time in the .ics file
 	 * @param filename
 	 * @return
 	 */
@@ -119,6 +122,7 @@ public class TimeSort {
 	}
 
 	/**
+	 * addcircledist calls GreatCircleDist methods to compute the great circle distance and input it into the files. 
 	 * @param cals
 	 * @throws IOException
 	 */

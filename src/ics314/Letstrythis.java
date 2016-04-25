@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class Letstrythis {
   private JTextField textField_1;
   private JTextField textField_2;
   private JTextField textField_3;
+  private JTextField textField_4;
   String[] startdateyear = {"2016","2017","2018","2019","2020","2021","2022","2023"};
   String[] startdatemonth = {"01","02","03","04","05","06","07","08","09",
       "10","11","12"};
@@ -449,6 +451,7 @@ public class Letstrythis {
       }
     });
     
+    
     /*********************************************************
      * CLASS OF EVENT LINE
      *********************************************************/
@@ -489,6 +492,48 @@ public class Letstrythis {
     textArea.setWrapStyleWord(true);                                        //MAKE THE WORDS WRAP
     frame.getContentPane().add(scroll);                                     //ADD THE SCROLLABLE TEXT AREA TO THE FRAME
     
+    
+    /*********************************************************
+     * Add File Lines
+     *********************************************************/
+    
+    /**********Add File: LABEL**********/
+    JLabel lbladdfile = new JLabel("Add Files:");                  //MAKE THE LABEL
+    lbladdfile.setBounds(406, 118, 70, 16);                             //SET THE POSITION OF THE LABEL
+    frame.getContentPane().add(lbladdfile);                            //ADD THE LABEL TO THE FRAME
+    
+    /**********Add File: TEXT FIELD**********/
+    textField_4 = new JTextField();                                         //MAKE THE TEXT FIELD
+    textField_4.setBounds(406, 140, 134, 28);                               //SET THE POSITION OF THE TEXT FIELD
+    frame.getContentPane().add(textField_4);                                //ADD THE TEXT FIELD TO THE FRAME
+    textField_4.setColumns(10);                                             //SET THE NUMBER OF COLUMNS IN THE TEXT FIELD
+    
+    /**********Add File: ENTER BUTTON**********/
+    JButton btnAddButton = new JButton("Add");                            //MAKE THE BUTTON
+    btnAddButton.setBounds(406, 169, 76, 29);                               //SET THE POSITION OF THE BUTTON
+    frame.getContentPane().add(btnAddButton);                               //ADD THE BUTTON TO THE FRAME
+    btnAddButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+    	  File file = new File(textField_4.getText());
+    	  if(file.exists() && !file.isDirectory()) { 
+    		  list.add(textField_4.getText());
+    		  String files = "";
+    		  for(int i = 0; i < list.size(); i++){
+    			  files = files + "\n" + list.get(i);
+    		  }
+    		  JOptionPane.showMessageDialog(null, "File Added! Current List: \n" + files);
+    	  }
+    	  else{
+    		  String files = "";
+    		  for(int i = 0; i < list.size(); i++){
+    			  files = files + "\n" + list.get(i);
+    		  }
+    		  JOptionPane.showMessageDialog(null, "File did not Exist. Please enter a valid filename. Current List : \n" + files);
+    	  }
+      }
+    });
 //    /**********ENTER MESSAGE: ENTER BUTTON**********/
 //    JButton btnEnter_2 = new JButton("enter");                              //MAKE THE BUTTON
 //    btnEnter_2.setBounds(524, 225, 76, 29);                                 //SET THE POSITION OF THE BUTTON
@@ -532,11 +577,6 @@ public class Letstrythis {
             System.out.println(gpslong);
             System.out.println(clas);
             list.add(filename);
-//    		list.add("f1.ics");
-//    		list.add("f2.ics");
-//    		list.add("f3.ics");
-//    		list.add("f4.ics");
-//    		list.add("f5.ics");
             createics(filename, tstart, tend, msg, gpslat, gpslong, clas);
             JOptionPane.showMessageDialog(null, "Calendar Created!");
             textField_1.setText("default"); // filename
@@ -566,6 +606,7 @@ public class Letstrythis {
 //    		list.add("f3.ics");
 //    		list.add("f4.ics");
 //    		list.add("f5.ics");
+//    		list.add("f6.ics");
 		for(int i = 0; i < list.size(); i ++){
 		System.out.println(list.get(i));
 	}

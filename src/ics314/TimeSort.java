@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class TimeSort {
 
@@ -33,10 +35,11 @@ public class TimeSort {
 
 			List<List<Integer>> manydates = new ArrayList<List<Integer>>();
 			List<List<String>> manyfiles = new ArrayList<List<String>>();
-			HashSet<Integer> unique = new HashSet<Integer>(dates);
-			for (Integer stuff : unique) {
-				System.out.println(stuff);
-			}
+			TreeSet<Integer> unique = new TreeSet<Integer>(dates);
+			Iterator<Integer> iterator = unique.iterator();
+//			for (Integer stuff : unique) {
+//				System.out.println("Date: "+ stuff);
+//			}
 			Object[] elements = unique.toArray();
 			for (int i = 0; i < unique.size(); i++) {
 				manydates.add(new ArrayList<Integer>());
@@ -58,6 +61,10 @@ public class TimeSort {
 							.get(i).get(j));
 				}
 				Arrays.sort(cals, new caltimeComp());
+				
+				if(iterator.hasNext()){
+	        System.out.println("Date: "+iterator.next());
+	      }
 
 				for (int k = 0; k < cals.length; k++) {
 					System.out.println(cals[k].getTime() + " "
